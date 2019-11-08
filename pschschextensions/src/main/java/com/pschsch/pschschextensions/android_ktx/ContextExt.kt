@@ -27,20 +27,16 @@ fun Context.showKeyboard(focusedView: View) =
 /**Rewritten some androidx.core.content.ContextCompat methods as ktx, so Proguard/R8 could shrink ContextCompat methods, if you don't use it**/
 
 fun Context.getDrawableCompat(@DrawableRes resId: Int): Drawable? {
-    when {
-        Build.VERSION.SDK_INT >= 21 -> return getDrawable(resId)
-        Build.VERSION.SDK_INT >= 16 -> return resources.getDrawable(resId)
+    return when {
+        Build.VERSION.SDK_INT >= 21 -> getDrawable(resId)
+        Build.VERSION.SDK_INT >= 16 -> resources.getDrawable(resId)
         else -> {
-            // Prior to JELLY_BEAN, Resources.getDrawable() would not correctly
-            // retrieve the final configuration density when the resource ID
-            // is a reference another Drawable resource. As a workaround, try
-            // to resolve the drawable reference manually.
             val resolvedId: Int
             synchronized(sLock) {
                 resources.getValue(resId, sTypedValue, true)
                 resolvedId = sTypedValue.resourceId
             }
-            return resources.getDrawable(resolvedId)
+            resources.getDrawable(resolvedId)
         }
     }
 }
