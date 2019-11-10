@@ -4,8 +4,9 @@ import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
 import android.widget.EditText
+import android.widget.TextView
 
-inline fun EditText.afterTextChanged(crossinline atc: (CharSequence) -> Unit) {
+inline fun TextView.afterTextChanged(crossinline atc: (CharSequence) -> Unit) {
     addTextChangedListener(object : TextWatcher {
         override fun afterTextChanged(s: Editable?) {
             if (s != null)
@@ -17,7 +18,7 @@ inline fun EditText.afterTextChanged(crossinline atc: (CharSequence) -> Unit) {
     })
 }
 
-inline fun EditText.onTextChanged(crossinline otc: (CharSequence) -> Unit) {
+inline fun TextView.onTextChanged(crossinline otc: (CharSequence) -> Unit) {
     addTextChangedListener(object : TextWatcher {
         override fun afterTextChanged(s: Editable?) {}
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -28,7 +29,7 @@ inline fun EditText.onTextChanged(crossinline otc: (CharSequence) -> Unit) {
     })
 }
 
-inline fun EditText.beforeTextChanged(crossinline otc: (CharSequence) -> Unit) {
+inline fun TextView.beforeTextChanged(crossinline otc: (CharSequence) -> Unit) {
     addTextChangedListener(object : TextWatcher {
         override fun afterTextChanged(s: Editable?) {}
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {

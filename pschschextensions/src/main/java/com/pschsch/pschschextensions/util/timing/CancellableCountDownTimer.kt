@@ -1,13 +1,11 @@
-package com.pschsch.pschschextensions.util
+package com.pschsch.pschschextensions.util.timing
 
 import android.os.Handler
 import android.os.Message
 import android.os.SystemClock
-import com.pschsch.pschschextensions.ktx.orTrue
-import com.pschsch.pschschextensions.ktx.orZero
 import java.lang.ref.WeakReference
 
-open class CloseableCountDownTimer {
+abstract class CancellableCountDownTimer {
 
     private var mMillisInFuture: Long = 0
     private var mCountdownInterval: Long = 0
@@ -33,8 +31,11 @@ open class CloseableCountDownTimer {
     }
 
     @Synchronized
-    fun start(millisInFuture: Long, countDownInterval: Long): CloseableCountDownTimer {
-        mHandler = CountDownHandler(WeakReference(this))
+    fun start(millisInFuture: Long, countDownInterval: Long): CancellableCountDownTimer {
+        mHandler =
+            CountDownHandler(
+                WeakReference(this)
+            )
         mMillisInFuture = millisInFuture
         mCountdownInterval = countDownInterval
         mCancelled = false
@@ -48,7 +49,7 @@ open class CloseableCountDownTimer {
     }
 
 
-    class CountDownHandler(private val countDownTimer: WeakReference<CloseableCountDownTimer>) :
+    class CountDownHandler(private val countDownTimer: WeakReference<CancellableCountDownTimer>) :
         Handler() {
         override fun handleMessage(msg: Message) {
 

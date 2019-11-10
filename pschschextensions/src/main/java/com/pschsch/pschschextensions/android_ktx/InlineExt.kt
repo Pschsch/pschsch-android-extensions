@@ -3,7 +3,7 @@ package com.pschsch.pschschextensions.android_ktx
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import com.pschsch.pschschextensions.util.CloseableCountDownTimer
+import com.pschsch.pschschextensions.util.timing.CancellableCountDownTimer
 
 inline fun broadCastReceiver(crossinline receive: (Context, Intent) -> Unit): BroadcastReceiver {
     return object : BroadcastReceiver() {
@@ -15,8 +15,8 @@ inline fun broadCastReceiver(crossinline receive: (Context, Intent) -> Unit): Br
     }
 }
 
-inline fun closeableCountDownTimerOnFinishOnly(crossinline finish: () -> Unit): CloseableCountDownTimer {
-    return object : CloseableCountDownTimer() {
+inline fun closeableCountDownTimerOnFinishOnly(crossinline finish: () -> Unit): CancellableCountDownTimer {
+    return object : CancellableCountDownTimer() {
         override fun onFinish() {
             finish()
         }
@@ -26,8 +26,8 @@ inline fun closeableCountDownTimerOnFinishOnly(crossinline finish: () -> Unit): 
 inline fun closeableCountDownTimer(
     crossinline finish: () -> Unit,
     crossinline tick: (Long) -> Unit
-): CloseableCountDownTimer {
-    return object : CloseableCountDownTimer() {
+): CancellableCountDownTimer {
+    return object : CancellableCountDownTimer() {
         override fun onTick(millisUntilFinished: Long) {
             tick(millisUntilFinished)
         }

@@ -1,5 +1,6 @@
 package com.pschsch.pschschextensions.android_ktx
 
+import android.app.Activity
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
@@ -15,14 +16,15 @@ import androidx.core.content.getSystemService
 private val sLock = Any()
 private val sTypedValue: TypedValue by lazy { TypedValue() }
 
-fun Context.hideKeyboard(focusedView: View) =
-    getSystemService<InputMethodManager>()?.hideSoftInputFromWindow(focusedView.windowToken, 0)
+fun Activity.hideKeyboard() =
+    getSystemService<InputMethodManager>()?.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
 
-fun Context.showKeyboard(focusedView: View) =
+fun Activity.showKeyboard() {
     getSystemService<InputMethodManager>()?.showSoftInput(
-        focusedView,
+        currentFocus,
         InputMethodManager.SHOW_IMPLICIT
     )
+}
 
 /**Rewritten some androidx.core.content.ContextCompat methods as ktx, so Proguard/R8 could shrink ContextCompat methods, if you don't use it**/
 

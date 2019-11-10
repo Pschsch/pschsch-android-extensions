@@ -10,5 +10,6 @@ data class LocationData(
     companion object {
         const val TYPE_LAST_KNOWN = -1
         const val TYPE_CURRENT = -2
+        const val TYPE_NULL = -3
     }
 }

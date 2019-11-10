@@ -8,15 +8,20 @@ interface LocationService {
 
     val locationLiveData : LiveData<LocationData>
 
-    fun setCallback(callback: LocationServiceCallback) : LocationService
-    fun setRequestParams(params : LocationRequestParameters) : LocationService
     fun startLocationUpdates()
     fun stopLocationUpdates()
     fun close()
 
     companion object {
-        fun create(c : Context): LocationService {
-            return LocationServiceImpl(c)
+        fun create(
+            c: Context,
+            params: LocationRequestParameters? = null,
+            serviceCallback: ((LocationServiceError) -> Unit)? = null
+        ): LocationService {
+            return LocationServiceImpl(c).apply {
+                params?.let { this.locationRequestParams = it }
+                this.serviceCallback = serviceCallback
+            }
         }
     }
 }
