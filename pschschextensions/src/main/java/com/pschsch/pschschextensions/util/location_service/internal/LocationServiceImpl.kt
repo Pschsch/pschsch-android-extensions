@@ -48,7 +48,7 @@ class LocationServiceImpl internal constructor(context: Context) :
         isLocationReceiving = true
         try {
             locationClient.lastLocation.addOnSuccessListener {
-                it.let { loc ->
+                it?.let { loc ->
                     locationLiveDataInternal.postValue(
                         LocationData(
                             loc,
