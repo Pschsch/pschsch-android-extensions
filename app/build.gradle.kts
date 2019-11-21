@@ -12,7 +12,7 @@ android {
         targetSdkVersion(28)
         versionCode = 1
         versionName = "1.0"
-        
+
         consumerProguardFiles("consumer-rules.pro")
     }
 
@@ -26,6 +26,7 @@ android {
         }
     }
 }
+
 val kotlinVersion = "1.3.50"
 val lifecycleVersion = "2.1.0"
 val coreAppCompatVersion = "1.1.0"
