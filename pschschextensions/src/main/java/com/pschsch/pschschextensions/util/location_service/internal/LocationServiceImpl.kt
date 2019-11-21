@@ -12,7 +12,7 @@ import com.pschsch.pschschextensions.util.location_service.*
 import com.pschsch.pschschextensions.util.location_service.LocationData.Companion.TYPE_NULL
 import java.lang.Exception
 
-class LocationServiceImpl internal constructor(context: Context) :
+internal class LocationServiceImpl(context: Context) :
     LocationService {
 
     override val locationLiveData: LiveData<LocationData>

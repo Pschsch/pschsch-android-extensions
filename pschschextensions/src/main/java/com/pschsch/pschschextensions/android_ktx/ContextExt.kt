@@ -59,6 +59,10 @@ fun Context.getColorStateListCompat(@ColorRes resId: Int): ColorStateList? {
     }
 }
 
+inline fun <reified T> Context.systemService() : T {
+    return getSystemService(T::class.java)
+}
+
 fun <T : Number> Context.dpToPx(dp: T) = dp.toFloat() * resources.displayMetrics.density
 
 fun <T : Number> Context.pxToDp(px: T) = px.toFloat() / resources.displayMetrics.density
