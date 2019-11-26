@@ -1,6 +1,7 @@
 package com.pschsch.pschschextensions.android_ktx
 
 import android.content.Context
+import android.graphics.Rect
 import android.os.Build
 import android.view.View
 import android.view.Window
@@ -26,6 +27,12 @@ fun Window.setDefaultStatusBarCompat(@ColorRes resId : Int? = null, context : Co
             }
         }
     }
+}
+
+fun Window.statusBarHeight(): Int {
+    val rectangle = Rect()
+    decorView.getWindowVisibleDisplayFrame(rectangle)
+    return rectangle.top
 }
 
 const val DEFAULT_SYSTEM_UI_VISIBILITY = 0

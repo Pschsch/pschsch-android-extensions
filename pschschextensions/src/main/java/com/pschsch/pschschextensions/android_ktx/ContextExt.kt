@@ -63,6 +63,8 @@ inline fun <reified T> Context.systemService() : T {
     return getSystemService(T::class.java)
 }
 
+/*inline fun <reified T : Number> Context.dpToPx(dp : T) : T = (dp.toFloat() * resources.displayMetrics.density) as T*/
+
 fun <T : Number> Context.dpToPx(dp: T) = dp.toFloat() * resources.displayMetrics.density
 
 fun <T : Number> Context.pxToDp(px: T) = px.toFloat() / resources.displayMetrics.density
