@@ -6,23 +6,21 @@ import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.TypedValue
-import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
-import androidx.core.content.ContextCompat
 import androidx.core.content.getSystemService
 
 private val sLock = Any()
 private val sTypedValue: TypedValue by lazy { TypedValue() }
 
 fun Activity.hideKeyboard() =
-    getSystemService<InputMethodManager>()?.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+        getSystemService<InputMethodManager>()?.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
 
 fun Activity.showKeyboard() {
     getSystemService<InputMethodManager>()?.showSoftInput(
-        currentFocus,
-        InputMethodManager.SHOW_IMPLICIT
+            currentFocus,
+            InputMethodManager.SHOW_IMPLICIT
     )
 }
 
@@ -58,12 +56,6 @@ fun Context.getColorStateListCompat(@ColorRes resId: Int): ColorStateList? {
         resources.getColorStateList(resId)
     }
 }
-
-inline fun <reified T> Context.systemService() : T {
-    return getSystemService(T::class.java)
-}
-
-/*inline fun <reified T : Number> Context.dpToPx(dp : T) : T = (dp.toFloat() * resources.displayMetrics.density) as T*/
 
 fun <T : Number> Context.dpToPx(dp: T) = dp.toFloat() * resources.displayMetrics.density
 

@@ -4,9 +4,9 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
+import androidx.core.content.getSystemService
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.pschsch.pschschextensions.android_ktx.systemService
 
 class NetworkStateReceiver : BroadcastReceiver(), NetworkStateService.Source {
 
@@ -18,8 +18,8 @@ class NetworkStateReceiver : BroadcastReceiver(), NetworkStateService.Source {
     override fun onReceive(context: Context, intent: Intent?) {
         if (intent == null || intent.extras == null) return
 
-        val manager = context.systemService<ConnectivityManager>()
-        val ni = manager.activeNetworkInfo
+        val manager = context.getSystemService<ConnectivityManager>()
+        val ni = manager?.activeNetworkInfo
         if (ni == null) {
             connectedInternal.value = false
             return
